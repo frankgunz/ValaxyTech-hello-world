@@ -1,6 +1,7 @@
-# Pull base image 
-From tomcat:8-jre8 
-
-# Maintainer 
-MAINTAINER "valaxytech@gmail.com" 
-COPY ./webapp.war /usr/local/tomcat/webapps
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG JAVA_OPTS
+ENV JAVA_OPTS=$JAVA_OPTS
+COPY vscode.jar vscode.jar
+EXPOSE 3000
+ENTRYPOINT exec java $JAVA_OPTS -jar vscode.jar
