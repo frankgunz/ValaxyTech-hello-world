@@ -1,7 +1,7 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAVA_OPTS
-ENV JAVA_OPTS=$JAVA_OPTS
-COPY vscode.jar vscode.jar
-EXPOSE 3000
-ENTRYPOINT exec java $JAVA_OPTS -jar vscode.jar
+FROM node:alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+copy ./ ./
+
+CMD ["npm", "start"]
